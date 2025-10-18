@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iglesia Cristiana de la Vida Abundante</title>
+
+  <!-- Vista previa para WhatsApp / redes -->
+  <meta property="og:title" content="Iglesia Cristiana de la Vida Abundante">
+  <meta property="og:description" content="Será como árbol plantado junto a corrientes de agua que da fruto a su tiempo.">
+  <meta property="og:image" content="https://tu-dominio.com/PortadaCuadrada.jpeg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tu-dominio.com/">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #fffafc;
+      color: #444;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    img {
+      width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    h1 {
+      font-size: 1.6em;
+      margin-top: 1rem;
+      color: #3a2a2a;
+    }
+    p {
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+  </style>
+
+  <meta http-equiv="refresh" content="2;url=https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf">
+</head>
+<body>
+  <img src="PortadaCuadrada.jpeg" alt="Vida Abundante">
+  <h1>Iglesia Cristiana de la Vida Abundante</h1>
+  <p>Será como árbol plantado junto a corrientes de agua que da fruto a su tiempo 🌿</p>
+  <p>Redirigiendo...</p>
+</body>
+</html>
