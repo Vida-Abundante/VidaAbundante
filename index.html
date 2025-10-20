@@ -41,7 +41,20 @@
     }
   </style>
 
+  <!-- 🔹 Redirección a AppSheet -->
   <meta http-equiv="refresh" content="2;url=https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf">
+
+  <!-- 🔹 Archivos PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="PortadaCuadrada.jpeg">
+  <meta name="theme-color" content="#fffafc">
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+
 </head>
 <body>
   <img src="PortadaCuadrada.jpeg" alt="Vida Abundante">
@@ -50,6 +63,7 @@
   <p>Abriendo...</p>
 </body>
 </html>
+
 
 
 
