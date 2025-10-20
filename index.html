@@ -105,20 +105,36 @@
   <link rel="apple-touch-icon" href="PortadaCuadrada.jpeg">
   <meta name="theme-color" content="#fffafc">
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
+ <script>
+  // Registrar el Service Worker (para PWA)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
 
-    function abrirAppsheet() {
-      window.location.href = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
-    }
+  const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
 
-    function mostrarModoApp() {
-      document.querySelector(".btn-container").style.display = "none";
-      document.getElementById("instruccion").style.display = "block";
+  function abrirAppsheet() {
+    window.location.href = appSheetURL;
+  }
+
+  function mostrarModoApp() {
+    document.querySelector(".btn-container").style.display = "none";
+    document.getElementById("instruccion").style.display = "block";
+  }
+
+  // ✅ Detectar si está instalada como app
+  window.addEventListener('DOMContentLoaded', () => {
+    const esAppInstalada =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+
+    if (esAppInstalada) {
+      // Si está instalada, ir directo al AppSheet
+      window.location.href = appSheetURL;
     }
-  </script>
+  });
+</script>
+
 </head>
 
 <body>
@@ -138,3 +154,4 @@
   </div>
 </body>
 </html>
+
