@@ -134,55 +134,43 @@
   </div>
 
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Registrar el Service Worker (para PWA)
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-  }
+    // Registrar el Service Worker (para PWA)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
 
-  const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
+    const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
 
-  function abrirAppsheet() {
-    window.location.href = appSheetURL;
-  }
-
-  function mostrarModoApp() {
-    document.querySelector(".btn-container").style.display = "none";
-    document.getElementById("instruccion").style.display = "block";
-  }
-
-  // Detectar si ya está instalada como app
-  const esAppInstalada =
-    window.matchMedia('(display-mode: standalone)').matches ||
-    window.navigator.standalone === true;
-
-  if (esAppInstalada) {
-    const loader = document.getElementById("loader");
-    const main = document.getElementById("main");
-
-    if (loader && main) {
-      loader.style.display = "flex";
-      main.style.display = "none";
-
-      // ⏳ Esperar un poquito antes de abrir AppSheet
-      setTimeout(() => {
-        window.location.href = appSheetURL;
-      }, 1200);
-    } else {
-      // fallback: si no existen, ir directo
+    function abrirAppsheet() {
       window.location.href = appSheetURL;
     }
-  }
 
-  // Hacer accesibles las funciones desde los botones
-  window.abrirAppsheet = abrirAppsheet;
-  window.mostrarModoApp = mostrarModoApp;
-});
-</script>
+    function mostrarModoApp() {
+      document.querySelector(".btn-container").style.display = "none";
+      document.getElementById("instruccion").style.display = "block";
+    }
 
+    // ✨ Detectar si ya está instalada como app
+    window.addEventListener('DOMContentLoaded', () => {
+      const esAppInstalada =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+
+      if (esAppInstalada) {
+        // Mostrar un "Abriendo..." breve y luego redirigir
+        document.getElementById("loader").style.display = "flex";
+        document.getElementById("main").style.display = "none";
+        setTimeout(() => {
+          window.location.href = appSheetURL;
+        }, 1200);
+      }
+    });
+  </script>
 </body>
 
+
 </html>
+
 
 
 
