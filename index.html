@@ -27,7 +27,7 @@
       padding: 1rem;
     }
 
-    img {
+    video {
       width: 220px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
@@ -91,7 +91,7 @@
       color: #444;
     }
 
-    #instruccion img {
+    #instruccion video {
       width: 90%;
       max-width: 320px;
       border-radius: 10px;
@@ -106,7 +106,6 @@
   <meta name="theme-color" content="#fffafc">
 
   <script>
-  // Registrar el Service Worker (para PWA)
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
   }
@@ -117,29 +116,24 @@
     window.location.href = appSheetURL;
   }
 
-  function mostrarModoApp() {
-    document.querySelector(".btn-container").style.display = "none";
-    document.getElementById("instruccion").style.display = "block";
-  }
-
-  // ✅ Detectar si está instalada como app
   window.addEventListener('DOMContentLoaded', () => {
     const esAppInstalada =
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true;
 
     if (esAppInstalada) {
-      // Si está instalada, ir directo al AppSheet
       window.location.href = appSheetURL;
     }
   });
-</script>
-
+  </script>
 </head>
 
 <body>
-   <h1>Para usarla como APP, abrí el menú del navegador ( ⋮ ) y elegí <b>“Agregar a pantalla de inicio”</h1>
-  <img src="InstruccionInstalar.jpeg" alt="Vida Abundante">
+  <h1>Para usarla como APP, abrí el menú del navegador ( ⋮ ) y elegí <b>“Agregar a pantalla de inicio”</b></h1>
+
+  <!-- 🎥 Video en lugar de imagen -->
+  <video src="InstruccionInstalar.mp4" controls autoplay muted loop playsinline></video>
+
   <h1>Así podrás abrirla desde tu pantalla como una aplicación 💖</h1>
   <p>🌿</p>
 
@@ -148,11 +142,8 @@
   </div>
 
   <div id="instruccion">
-    <p>Iglesia Cristiana de la Vida Abundante</b>.</p>
+    <p>Iglesia Cristiana de la Vida Abundante</p>
     <p>💖</p>
   </div>
 </body>
 </html>
-
-
-
