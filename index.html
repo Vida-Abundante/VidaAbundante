@@ -105,72 +105,52 @@
   <link rel="apple-touch-icon" href="PortadaCuadrada.jpeg">
   <meta name="theme-color" content="#fffafc">
 
-<body>
-  <div id="main" style="text-align: center;">
-    <img src="PortadaCuadrada.jpeg" alt="Vida Abundante" style="width: 220px; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
-    <h1 style="color:#3a2a2a;">Iglesia Cristiana de la Vida Abundante</h1>
-    <p style="font-style: italic;">Será como árbol plantado junto a corrientes de agua que da fruto a su tiempo 🌿</p>
-
-    <!-- Botones -->
-    <div class="btn-container" style="margin-top: 1.5rem;">
-      <button onclick="abrirAppsheet()" style="background-color:#d8b6c6; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-size:1em; cursor:pointer;">Ver en navegador 🌐</button>
-      <button onclick="mostrarModoApp()" style="background-color:#f2d4e0; color:#3a2a2a; border:none; padding:12px 20px; border-radius:8px; font-size:1em; margin-left:10px; cursor:pointer;">Ver como aplicación 📱</button>
-    </div>
-
-    <!-- Instrucciones -->
-    <div id="instruccion" style="display:none; margin-top: 2rem; max-width: 340px; text-align: left; color:#3a2a2a;">
-      <p style="font-size:1.1em; line-height:1.6;">
-        <strong>Para usarla como app</strong>, abrí el menú del navegador → <strong>⋮</strong><br>
-        y elegí → <strong>Agregar a pantalla de inicio</strong>.<br><br>
-        Así podrás abrirla desde tu pantalla como una aplicación 💖
-      </p>
-      <img src="InstruccionInstalar.jpeg" alt="Cómo agregar a la pantalla de inicio" style="width:100%; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.15); margin-top: 1rem;">
-    </div>
-  </div>
-
-  <!-- Animación de carga -->
-  <div id="loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:#fffafc; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:999;">
-    <p style="font-size:1.2em; color:#3a2a2a;">Abriendo...</p>
-  </div>
-
   <script>
-    // Registrar el Service Worker (para PWA)
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
+  // Registrar el Service Worker (para PWA)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
 
-    const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
+  const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
 
-    function abrirAppsheet() {
+  function abrirAppsheet() {
+    window.location.href = appSheetURL;
+  }
+
+  function mostrarModoApp() {
+    document.querySelector(".btn-container").style.display = "none";
+    document.getElementById("instruccion").style.display = "block";
+  }
+
+  // ✅ Detectar si está instalada como app
+  window.addEventListener('DOMContentLoaded', () => {
+    const esAppInstalada =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+
+    if (esAppInstalada) {
+      // Si está instalada, ir directo al AppSheet
       window.location.href = appSheetURL;
     }
+  });
+</script>
 
-    function mostrarModoApp() {
-      document.querySelector(".btn-container").style.display = "none";
-      document.getElementById("instruccion").style.display = "block";
-    }
+</head>
 
-    // ✨ Detectar si ya está instalada como app
-    window.addEventListener('DOMContentLoaded', () => {
-      const esAppInstalada =
-        window.matchMedia('(display-mode: standalone)').matches ||
-        window.navigator.standalone === true;
+<body>
+  <img src="InstruccionInstalar.jpeg" alt="Vida Abundante">
+  <h1>Para usarla como app, abrí el menú del navegador ( ⋮ ) y elegí <b>“Agregar a pantalla de inicio”.
+    Así podrás abrirla desde tu pantalla como una aplicación 💖</h1>
+  <p>🌿</p>
 
-      if (esAppInstalada) {
-        // Mostrar un "Abriendo..." breve y luego redirigir
-        document.getElementById("loader").style.display = "flex";
-        document.getElementById("main").style.display = "none";
-        setTimeout(() => {
-          window.location.href = appSheetURL;
-        }, 1200);
-      }
-    });
-  </script>
+  <div class="btn-container">
+    <button class="btn-navegador" onclick="abrirAppsheet()">🌐 Ver en navegador</button>
+    <button class="btn-app" onclick="mostrarModoApp()">📱 Ver como aplicación</button>
+  </div>
+
+  <div id="instruccion">
+    <p>Iglesia Cristiana de la Vida Abundante</b>.</p>
+    <p>💖</p>
+  </div>
 </body>
-
-
 </html>
-
-
-
-
