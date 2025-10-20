@@ -24,25 +24,81 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      padding: 1rem;
     }
+
     img {
       width: 220px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      margin-bottom: 1rem;
     }
+
     h1 {
       font-size: 1.6em;
-      margin-top: 1rem;
+      margin: 0.5rem 0;
       color: #3a2a2a;
     }
+
     p {
-      margin-top: 0.5rem;
+      margin-top: 0.3rem;
       font-style: italic;
     }
-  </style>
 
-  <!-- 🔹 Redirección a AppSheet -->
-  <meta http-equiv="refresh" content="2;url=https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf">
+    .btn-container {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-navegador {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-app {
+      background-color: #28a745;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #info {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #666;
+      display: none;
+    }
+
+    #instruccion {
+      display: none;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    #instruccion img {
+      width: 90%;
+      max-width: 320px;
+      border-radius: 10px;
+      margin-top: 0.8rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
 
   <!-- 🔹 Archivos PWA -->
   <link rel="manifest" href="manifest.json">
@@ -53,17 +109,32 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
-  </script>
 
+    function abrirAppsheet() {
+      window.location.href = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
+    }
+
+    function mostrarModoApp() {
+      document.querySelector(".btn-container").style.display = "none";
+      document.getElementById("instruccion").style.display = "block";
+    }
+  </script>
 </head>
+
 <body>
   <img src="PortadaCuadrada.jpeg" alt="Vida Abundante">
   <h1>Iglesia Cristiana de la Vida Abundante</h1>
   <p>Será como árbol plantado junto a corrientes de agua que da fruto a su tiempo 🌿</p>
-  <p>Abriendo...</p>
+
+  <div class="btn-container">
+    <button class="btn-navegador" onclick="abrirAppsheet()">🌐 Ver en navegador</button>
+    <button class="btn-app" onclick="mostrarModoApp()">📱 Ver como aplicación</button>
+  </div>
+
+  <div id="instruccion">
+    <p>Para usarla como app, abrí el menú del navegador (⋮ o “Compartir”) y elegí <b>“Agregar a pantalla de inicio”</b>.</p>
+    <img src="PortadaCuadrada.jpeg" alt="Ejemplo de instalación">
+    <p>Así podrás abrirla desde tu pantalla como una aplicación 💖</p>
+  </div>
 </body>
 </html>
-
-
-
-
