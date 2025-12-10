@@ -1,7 +1,7 @@
 {
   "name": "Vida Abundante",
   "short_name": "Vida Abundante",
-  "start_url": "./index.html",
+  "start_url": "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf",
   "display": "standalone",
   "background_color": "#fffafc",
   "theme_color": "#fffafc",
@@ -13,3 +13,4 @@
     }
   ]
 }
+
