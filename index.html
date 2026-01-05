@@ -108,8 +108,12 @@
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true;
 
-    if (esAppInstalada) {
-      window.location.replace(appSheetURL);
+   /*
+if (esAppInstalada) {
+  window.location.replace(appSheetURL);
+}
+*/
+
     } else {
       window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('hidden');
@@ -171,5 +175,6 @@
 </script>
 </body>
 </html>
+
 
 
