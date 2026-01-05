@@ -75,7 +75,7 @@
   </style>
 
   <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
+  <!-- <link rel="manifest" href="manifest.json"> -->
   <link rel="apple-touch-icon" href="PortadaCuadrada.jpeg">
   <meta name="theme-color" content="#fffafc">
 </head>
@@ -96,9 +96,11 @@
 
   <!-- Script AppSheet / PWA -->
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
+    /*
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+*/
 
     const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
 
@@ -175,6 +177,7 @@ if (esAppInstalada) {
 </script>
 </body>
 </html>
+
 
 
 
