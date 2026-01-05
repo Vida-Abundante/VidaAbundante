@@ -136,7 +136,7 @@
 
     // 🔹 Cargar JSON externo desde tu repo
     async function cargarBiblia() {
-      const response = await fetch("VidaAbundante - RV1960.json");
+      const response = await fetch("https://raw.githubusercontent.com/Vida-Abundante/VidaAbundante/main/VidaAbundante%20-%20RV1960.json");
       const biblia = await response.json();
 
       for (const v of biblia) {
@@ -151,3 +151,4 @@
   </script>
 </body>
 </html>
+
