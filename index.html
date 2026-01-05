@@ -118,37 +118,58 @@
   </script>
 
   <!-- Script Firebase para subir JSON a Firestore -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBZegbOl9gQTR6JAQokEc8YmVtbbcdr8ik",
-      authDomain: "vidaabundante-82bbe.firebaseapp.com",
-      projectId: "vidaabundante-82bbe",
-      storageBucket: "vidaabundante-82bbe.firebasestorage.app",
-      messagingSenderId: "975960147046",
-      appId: "1:975960147046:web:79345d4baff3d8c82059a7"
-    };
+  console.log("⏳ Iniciando script Firebase...");
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  const firebaseConfig = {
+    apiKey: "AIzaSyBZegbOl9gQTR6JAQokEc8YmVtbbcdr8ik",
+    authDomain: "vidaabundante-82bbe.firebaseapp.com",
+    projectId: "vidaabundante-82bbe",
+    storageBucket: "vidaabundante-82bbe.firebasestorage.app",
+    messagingSenderId: "975960147046",
+    appId: "1:975960147046:web:79345d4baff3d8c82059a7"
+  };
 
-    // 🔹 Cargar JSON externo desde tu repo
-    async function cargarBiblia() {
-      const response = await fetch("https://raw.githubusercontent.com/Vida-Abundante/VidaAbundante/main/VidaAbundante%20-%20RV1960.json");
-      const biblia = await response.json();
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-      for (const v of biblia) {
-        await setDoc(doc(db, "Biblia", `${v.Libro}_${v.Capitulo}_${v.Versiculo}`), v);
-      }
+  console.log("🔥 Firebase conectado correctamente");
 
-      console.log("Importación completa ✅");
+  async function cargarBiblia() {
+    console.log("📖 Intentando cargar JSON...");
+
+    const response = await fetch(
+      "https://raw.githubusercontent.com/Vida-Abundante/VidaAbundante/main/VidaAbundante%20-%20RV1960.json"
+    );
+
+    console.log("🌐 Respuesta fetch:", response.status);
+
+    if (!response.ok) {
+      console.error("❌ No se pudo cargar el JSON");
+      return;
     }
 
-    // Ejecutar solo UNA vez
-    cargarBiblia();
-  </script>
+    const biblia = await response.json();
+    console.log("✅ JSON cargado. Total versículos:", biblia.length);
+
+    // ⚠️ SUBIMOS SOLO 5 PARA PRUEBA
+    for (let i = 0; i < 5; i++) {
+      const v = biblia[i];
+      await setDoc(
+        doc(db, "Biblia", `${v.Libro}_${v.Capitulo}_${v.Versiculo}`),
+        v
+      );
+    }
+
+    console.log("🎉 Prueba completada: 5 versículos subidos");
+  }
+
+  cargarBiblia();
+</script>
 </body>
 </html>
+
 
