@@ -28,28 +28,13 @@
       transition: visibility 0.3s ease;
     }
 
-    /* 🔹 Ocultar todo al cargar para evitar parpadeo */
-    body.hidden {
-      visibility: hidden;
-    }
+    body.hidden { visibility: hidden; }
 
-    video {
-      width: 220px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      margin-bottom: 1rem;
-    }
+    video { width: 220px; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.2); margin-bottom: 1rem; }
 
-    h1 {
-      font-size: 1.6em;
-      margin: 0.5rem 0;
-      color: #3a2a2a;
-    }
+    h1 { font-size: 1.6em; margin: 0.5rem 0; color: #3a2a2a; }
 
-    p {
-      margin-top: 0.3rem;
-      font-style: italic;
-    }
+    p { margin-top: 0.3rem; font-style: italic; }
 
     .btn-container {
       margin-top: 2rem;
@@ -69,14 +54,9 @@
       transition: background-color 0.3s;
     }
 
-    .btn-navegador {
-      background-color: #007bff;
-      color: white;
-    }
+    .btn-navegador { background-color: #007bff; color: white; }
 
-    button:hover {
-      opacity: 0.9;
-    }
+    button:hover { opacity: 0.9; }
 
     #instruccion {
       display: none;
@@ -94,7 +74,7 @@
     }
   </style>
 
-  <!-- 🔹 Archivos PWA -->
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="PortadaCuadrada.jpeg">
   <meta name="theme-color" content="#fffafc">
@@ -103,7 +83,6 @@
 <body class="hidden">
   <h4>Para usarla como APP, abrí el menú del navegador ( ⋮ ) y elegí <b>“Agregar a pantalla de inicio”</b></h4>
 
-  <!-- 🎥 Video de instrucciones -->
   <video src="InstruccionInstalar.mp4" controls autoplay muted loop playsinline></video>
 
   <h4>Así podrás abrirla desde tu pantalla como una aplicación 💖</h4>
@@ -115,36 +94,60 @@
     <p>💖</p>
   </div>
 
+  <!-- Script AppSheet / PWA -->
   <script>
-    // Registrar el Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
 
     const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
 
-    function abrirAppsheet() {
-      window.location.href = appSheetURL;
-    }
+    function abrirAppsheet() { window.location.href = appSheetURL; }
 
-    // Detectar si está instalada ANTES de mostrar el contenido
     const esAppInstalada =
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true;
 
     if (esAppInstalada) {
-      // 🔹 Redirigir sin mostrar nada
       window.location.replace(appSheetURL);
     } else {
-      // 🔹 Mostrar contenido solo si NO está instalada
       window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('hidden');
       });
     }
   </script>
+
+  <!-- Script Firebase para subir JSON a Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZegbOl9gQTR6JAQokEc8YmVtbbcdr8ik",
+      authDomain: "vidaabundante-82bbe.firebaseapp.com",
+      projectId: "vidaabundante-82bbe",
+      storageBucket: "vidaabundante-82bbe.firebasestorage.app",
+      messagingSenderId: "975960147046",
+      appId: "1:975960147046:web:79345d4baff3d8c82059a7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 🔹 Cargar JSON externo desde tu repo
+    async function cargarBiblia() {
+      const response = await fetch("VidaAbundante - RV1960.json");
+      const biblia = await response.json();
+
+      for (const v of biblia) {
+        await setDoc(doc(db, "Biblia", `${v.Libro}_${v.Capitulo}_${v.Versiculo}`), v);
+      }
+
+      console.log("Importación completa ✅");
+    }
+
+    // Ejecutar solo UNA vez
+    cargarBiblia();
+  </script>
 </body>
 </html>
-
-
-
-
