@@ -96,33 +96,19 @@
   </div>
 
   <!-- Script AppSheet / PWA -->
-  <script>
-    /*
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
-}
-*/
+<script>
+  // 🔹 TEMPORAL: sin service worker ni redirección
+  const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
 
-    const appSheetURL = "https://www.appsheet.com/start/4d7261c5-f84b-4ed6-9883-d710368fe1bf";
+  function abrirAppsheet() {
+    window.location.href = appSheetURL;
+  }
 
-    function abrirAppsheet() { window.location.href = appSheetURL; }
-
-    const esAppInstalada =
-      window.matchMedia('(display-mode: standalone)').matches ||
-      window.navigator.standalone === true;
-
-   /*
-if (esAppInstalada) {
-  window.location.replace(appSheetURL);
-}
-*/
-
-    } else {
-      window.addEventListener('DOMContentLoaded', () => {
-        document.body.classList.remove('hidden');
-      });
-    }
-  </script>
+  // Mostrar contenido normalmente
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.remove('hidden');
+  });
+</script>
 
   <!-- Script Firebase para subir JSON a Firestore -->
 <script type="module">
@@ -178,6 +164,7 @@ if (esAppInstalada) {
 </script>
 </body>
 </html>
+
 
 
 
